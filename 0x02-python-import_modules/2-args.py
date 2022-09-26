@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+/usr/local/lib/python3.8/dist-packages 
+
 import sys
 
 if __name__ != "__main__":
