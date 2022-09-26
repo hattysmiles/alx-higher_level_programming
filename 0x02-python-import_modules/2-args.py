@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-/usr/local/lib/python3.8/dist-packages 
+#!/usr/local/lib/python3.8/dist-packages 
 
 import sys
 
