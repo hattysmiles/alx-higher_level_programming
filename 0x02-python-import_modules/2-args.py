@@ -1,4 +1,4 @@
-##!/usr/bin/python3
+#!/usr/bin/python3
 if __name__ == "__main__":
     import sys
     argv = sys.argv[1:]
@@ -13,4 +13,4 @@ if __name__ == "__main__":
         print("{:d} arguments:".format(argv_count))
         while index <= argv_count:
             print("{:d}: {:s}".format(index, sys.argv[index]))
-            index += 
+            index += 1
