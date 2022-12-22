@@ -1,39 +1,20 @@
 #!/usr/bin/python3
-"""script for use in getting all states from sql db
 """
+python script that lists all cities from the database hbtn_0e_4_usa
+with specified state name
+"""
+
 import MySQLdb
-import sys
+from sys import argv
 
-
-if __name__ == '__main__':
-    args = sys.argv
-    if len(args) < 5:
-        print("Usage: {} username password db_name state_name".format(args[0]))
-        exit(1)
-
-    # connect to database and set up user input variables
-    username = args[1]
-    password = args[2]
-    data = args[3]
-    statename = args[4]
-    db = MySQLdb.connect(host='localhost', user=username,
-                         passwd=password, db=data,
-                         port=3306)
-    cur = db.cursor()
-    # execute sql join statement to gather states and cities
-    num_rows = cur.execute('''
-        SELECT cities.id, cities.name, states.name
-        FROM cities INNER JOIN states
-        ON cities.state_id=states.id
-        ORDER BY cities.id ASC
-        ''')
-    rows = cur.fetchall()
-    # get cities from all rows matching state name
-    cities = [row[1] for row in rows if statename == row[2]]
-    num_cities = len(cities)
-    # print cities out using custom ends to format output
-    for i, city in enumerate(cities):
-        if i == num_cities - 1:
-            print(city)
-        else:
-            print(city, end=", ")
+if __name__ == "__main__":
+    db = MySQLdb.connect(host="localhost", port=3306, user=argv[1],
+                         passwd=argv[2], db=argv[3], charset="utf8")
+    cursor = db.cursor()
+    cursor.execute("SELECT cities.name FROM cities \
+    JOIN states ON cities.state_id = states.id WHERE states.name LIKE %s \
+    ORDER BY cities.id", (argv[4],))
+    rows = cursor.fetchall()
+    print(", ".join(city[0] for city in rows))
+    cursor.close()
+    db.close()
