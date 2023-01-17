@@ -1,3 +1,3 @@
 #!/bin/bash
-# shellcheck disable=SC2046
-if [ $(curl -L -s -X HEAD -w "%{http_code}" "$1") == '200' ]; then curl -Ls "$1"; fi
+# script to send delete request to the url passed and displays reponse
+curl -s -X DELETE "$1"
